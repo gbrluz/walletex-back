@@ -1,0 +1,19 @@
+{
+  "name": "walletex-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.8.1",
+    "knex": "^3.1.0",
+    "pg": "^8.11.5",
+    "postgres": "^3.4.4"
+  }
+}
