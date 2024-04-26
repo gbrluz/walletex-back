@@ -1,0 +1,21 @@
+type Item {
+    id: Int
+    name: String
+    price: Float
+    data: String
+}
+
+type Query {
+    transactions: [Item]
+}
+
+type Mutation {
+    createTransaction(data: CreateTransactionInput): Item
+}
+
+input CreateTransactionInput {
+    id: Int
+    name: String
+    price: Float
+    data: String
+}
