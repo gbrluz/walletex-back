@@ -1,45 +1,6 @@
 const { ApolloServer} = require("apollo-server")
 const service = require("./service");
 
-const transactions = [
-    {
-      id: 1,
-      name: "Lanche",
-      price: "12.33",
-      data: "12/03/2024",
-    },
-    {
-      id: 2,
-      name: "Academia",
-      price: "109.90",
-      data: "10/03/2024",
-    },
-    {
-      id: 3,
-      name: "Posto",
-      price: "220.00",
-      data: "07/03/2024",
-    },
-    {
-      id: 4,
-      name: "Mercado",
-      price: "158.78",
-      data: "03/03/2024",
-    },
-    {
-      id: 5,
-      name: "Ro",
-      price: "198.90",
-      data: "01/03/2024",
-    },
-    {
-      id: 6,
-      name: "Roupa",
-      price: "198.90",
-      data: "01/03/2024",
-    },
-  ];
-
 const typeDefs = `
 type Item {
   id: Int
@@ -54,6 +15,7 @@ type Query {
 
 type Mutation {
   addTransaction(data: CreateTransactionInput): Item
+  removeTransaction(id: Int): Boolean
 }
 
 input CreateTransactionInput {
@@ -61,6 +23,10 @@ input CreateTransactionInput {
   name: String
   price: Float
   data: String
+}
+
+input RemoveTransactionInput {
+  id: Int
 }`
 
 const resolvers = {
@@ -68,14 +34,19 @@ const resolvers = {
       async transactions(_, args) {
         const transactions = await service.getTransactions();
         return transactions;
-
       }
     },
     Mutation: {
       async addTransaction(_, args) {
-        const transaction = args.transaction;
-        const newTransaction = await server.addTransaction(transaction)
+        const transaction = args;
+        const newTransaction = await service.addTransaction({transaction})
         return newTransaction
+      },
+      async removeTransaction (_, args) {
+        const id = args;
+        console.log(id)
+        const removeTransaction = await service.removeTransaction(id)
+        return removeTransaction;
       }
     }
 }
