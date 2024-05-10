@@ -18,6 +18,13 @@ type Card {
   cardFlag: String
 }
 
+type User {
+  id: Int
+  name: String
+  email: String
+  number: String
+}
+
 type Query {
   transactions: [Item]
   cards: [Card]
